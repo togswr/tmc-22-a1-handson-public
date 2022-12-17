@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  blog:
+    image: node:16-alpine
+    working_dir: /var/www
+    ports:
+      - ${NEXT_BLOG_PORT}:3000
+    volumes:
+      - ./next:/var/www
+    tty: true
+    command: sh -c "npm run dev"
+
+  admin:
+    image: node:16-alpine
+    working_dir: /var/www
+    ports:
+      - ${NEXT_ADMIN_PORT}:3000
+    volumes:
+      - ./breeze-next:/var/www
+    tty: true
+    command: sh -c "npm run dev"
+
+  laravel:
+    build: ./docker/php
+    working_dir: /var/www/laravel
+    ports:
+      - ${LARAVEL_PORT}:8000
+    volumes:
+      - ./laravel:/var/www/laravel
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./log:/var/log
+    command: sh -c "php artisan serve --host=0.0.0.0"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: db_next_laravel
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+    ports:
+      - ${DB_PORT}:3306

@@ -1,0 +1,6 @@
+{
+  "eslint.workingDirectories": ["./next", "./breeze-next"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
