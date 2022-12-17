@@ -2,6 +2,12 @@
 
 # セットアップ
 
+## 本リポジトリのクローン
+
+1. `git clone git@github.com:togswr/tmc-22-a1-handson-public`
+    - or `git clone https://github.com/togswr/tmc-22-a1-handson-public`
+2. `cd ./tmc-22-a1-handson-public`
+
 ## コンテナの立ち上げ
 
 1. 以下のコマンドをコピペしてターミナルで実行
