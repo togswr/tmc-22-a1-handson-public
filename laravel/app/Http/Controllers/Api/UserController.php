@@ -63,7 +63,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $requesterId = Auth::id();
-        if ($requesterId !== 1) {
+        if ($requesterId !== $user->getAuthIdentifier()) {
             return response()->json('error', 403);
         }
         $user->delete();
