@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   blog:
-    image: node:16-alpine
+    image: node:20-alpine
     working_dir: /var/www
     ports:
       - ${NEXT_BLOG_PORT}:3000
@@ -12,7 +12,7 @@ services:
     command: sh -c "npm run dev"
 
   admin:
-    image: node:16-alpine
+    image: node:20-alpine
     working_dir: /var/www
     ports:
       - ${NEXT_ADMIN_PORT}:3000
